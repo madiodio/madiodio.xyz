@@ -1,11 +1,424 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello World</title>
-</head>
-<body>
-    <h1>Hello World</h1>
-</body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Hi there 👋🏾</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;500;600&display=swap"
+            rel="stylesheet"
+        />
+        <style>
+            :root {
+                --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+                --color-bg: #fff;
+                --color-surface: #f5f5f5;
+                --color-border: #e0e0e0;
+                --color-text: #171717;
+                --color-text-muted: #525252;
+                --color-text-subtle: #737373;
+                --color-accent: #90a959;
+            }
+
+            @media (prefers-color-scheme: dark) {
+                :root {
+                    --color-bg: #0a0a0a;
+                    --color-surface: #111;
+                    --color-border: #262626;
+                    --color-text: #ededed;
+                    --color-text-muted: #a1a1a1;
+                    --color-text-subtle: #6b6b6b;
+                }
+            }
+
+            :root[data-theme="light"] {
+                --color-bg: #fff;
+                --color-surface: #f5f5f5;
+                --color-border: #e0e0e0;
+                --color-text: #171717;
+                --color-text-muted: #525252;
+                --color-text-subtle: #737373;
+            }
+
+            :root[data-theme="dark"] {
+                --color-bg: #464258;
+                --color-surface: #111;
+                --color-border: #262626;
+                --color-text: #ededed;
+                --color-text-muted: #a1a1a1;
+                --color-text-subtle: #6b6b6b;
+            }
+
+            .theme-toggle {
+                width: 36px;
+                height: 36px;
+                border: 1px solid var(--color-border);
+                border-radius: 50%;
+                background-color: var(--color-surface);
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition:
+                    background-color 0.15s,
+                    border-color 0.15s;
+                margin-bottom: 2rem;
+            }
+
+            .theme-toggle:hover {
+                background-color: var(--color-border);
+            }
+
+            .theme-toggle svg {
+                width: 18px;
+                height: 18px;
+                color: var(--color-text);
+            }
+
+            .theme-toggle .icon-sun {
+                display: none;
+            }
+
+            .theme-toggle .icon-moon {
+                display: block;
+            }
+
+            :root[data-theme="dark"] .theme-toggle .icon-sun {
+                display: block;
+            }
+
+            :root[data-theme="dark"] .theme-toggle .icon-moon {
+                display: none;
+            }
+
+            *,
+            *::before,
+            *::after {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            html {
+                scroll-behavior: smooth;
+            }
+
+            body {
+                font-family: var(--font-sans);
+                font-size: 1rem;
+                line-height: 1.625;
+                color: var(--color-text);
+                background-color: var(--color-bg);
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+            }
+
+            .bio-container {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .bio-content {
+                max-width: 720px;
+                margin: 0 auto;
+                padding: 4rem 1.5rem;
+                width: 100%;
+            }
+
+            .bio-intro {
+                margin-bottom: 1.5rem;
+            }
+
+            .bio-intro h1 {
+                font-size: 1.875rem;
+                font-weight: 600;
+                color: var(--color-text);
+                letter-spacing: -0.025em;
+            }
+
+            .bio {
+                margin-bottom: 2.5rem;
+            }
+
+            .bio p {
+                font-size: 1.125rem;
+                line-height: 1.625;
+                max-width: 540px;
+            }
+
+            .bio-links {
+                padding-left: 1.25rem;
+                margin-top: 1.5rem;
+            }
+
+            .bio-links li {
+                margin-bottom: 0.5rem;
+                line-height: 1.625;
+                font-size: 1.125rem;
+                position: relative;
+            }
+
+            code {
+                font-family: "Fira Code", "JetBrains Mono", monospace;
+                font-size: 0.9em;
+                padding: 0.15em 0.4em;
+                border-radius: 4px;
+                background: var(--color-surface);
+            }
+
+            .code-keyword {
+                color: var(--code-keyword);
+            }
+
+            .code-func {
+                color: var(--code-func);
+            }
+
+            .code-str {
+                color: var(--code-str);
+            }
+
+            .code-num {
+                color: var(--code-num);
+            }
+
+            .code-tag {
+                color: var(--code-tag);
+            }
+
+            .code-type {
+                color: var(--code-type);
+            }
+
+            :root {
+                --code-keyword: #ffb8d1;
+                --code-func: #fff352;
+                --code-str: #ffea00;
+                --code-num: #c5a3ff;
+                --code-tag: #ff9f2e;
+                --code-type: #c2ffdf;
+            }
+
+            :root[data-theme="light"] {
+                --code-keyword: #ad5877;
+                --code-func: #9673d3;
+                --code-str: #7c3aed;
+                --code-num: #5a5475;
+                --code-tag: #ea580c;
+                --code-type: #059669;
+            }
+
+            .bio-images {
+                display: flex;
+                gap: 1rem;
+                flex-wrap: wrap;
+            }
+
+            .bio-images img {
+                width: 150px;
+                height: 150px;
+                border-radius: 50%;
+                object-fit: cover;
+            }
+
+            .site-footer {
+                max-width: 720px;
+                margin: 0 auto;
+                padding: 0 1.5rem 2rem;
+                width: 100%;
+            }
+
+            .site-footer p {
+                font-size: 0.875rem;
+                color: var(--color-text-subtle);
+            }
+
+            @media (max-width: 640px) {
+                .bio-content {
+                    padding: 3rem 1.5rem;
+                }
+
+                .bio-intro h1 {
+                    font-size: 1.5rem;
+                }
+
+                .bio p {
+                    font-size: 1rem;
+                }
+
+                .bio-images {
+                    flex-direction: column;
+                }
+
+                .bio-images img {
+                    max-width: 200px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="bio-container">
+            <div class="bio-content">
+                <button
+                    class="theme-toggle"
+                    type="button"
+                    aria-label="Toggle dark mode"
+                >
+                    <svg
+                        class="icon-sun"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                    >
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line
+                            x1="18.36"
+                            y1="18.36"
+                            x2="19.78"
+                            y2="19.78"
+                        ></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg
+                        class="icon-moon"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                    >
+                        <path
+                            d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"
+                        ></path>
+                    </svg>
+                </button>
+                <div class="bio-intro">
+                    <h1>Hi there 👋🏾</h1>
+                </div>
+                <div class="bio">
+                    <p>
+                        I'm Madiodio Gaye, a Frontend Engineer from Senegal 🇸🇳.
+                    </p>
+                </div>
+                <ul class="bio-links">
+                    <li>
+                        🗂 I currently live and work as a Frontend Engineer in
+                        Paris, France.
+                    </li>
+                    <li>
+                        😀 I'm interested in
+                        <code class="code-keyword">frontend engineering</code>,
+                        <code class="code-keyword">design systems</code>,
+                        <code class="code-func">serverless programming</code>,
+                        <code class="code-func">AI agents & skills</code>,
+                        <code class="code-func">javascript</code>,
+                        <code class="code-func">build tools</code>, and
+                        <code class="code-keyword">product design</code> in
+                        general.
+                    </li>
+                    <li>
+                        👨🏾‍💻 I mostly speak in <code class="code-func">.js</code>,
+                        <code class="code-func">.ts</code>,
+                        <code class="code-func">.jsx</code>,
+                        <code class="code-func">.tsx</code>,
+                        <code class="code-tag">.css</code>,
+                        <code class="code-type">.html</code>,
+                        <code class="code-num">.php</code>,
+                        <code class="code-str">.svg</code>,
+                        <code class="code-num">.graphql</code>,
+                        <code class="code-num">.yml</code> and also
+                        <code class="code-tag">.sketch</code> and
+                        <code class="code-tag">.fig</code>.
+                    </li>
+                    <li>
+                        🙌🏽 Would love to get more involved in
+                        <code class="code-keyword">open source</code> work, feel
+                        free to ping me about
+                        <code class="code-keyword">testing</code>,
+                        <code class="code-keyword">architecture</code>,
+                        <code class="code-keyword">design</code>,
+                        <code class="code-keyword">docs</code>,
+                        <code class="code-keyword">triaging</code> and
+                        <code class="code-keyword">maintaining issues</code>.
+                    </li>
+                    <li>
+                        👀 Have an eye on learning
+                        <code class="code-type">Rust</code>,
+                        <code class="code-type">SwiftUI</code>,
+                        <code class="code-type">WASM</code> and
+                        <code class="code-type">Go</code>.
+                    </li>
+                </ul>
+                <div class="bio" style="margin-top: 2rem">
+                    <p>I love sports 🚴⇢ 🏀⇢ ⚽️⇢ 🏃🏾‍♂️.</p>
+                    <p style="margin-top: 0.5rem">
+                        🌍 Anywhere in Africa is home to me.
+                    </p>
+                </div>
+                <div class="bio-images">
+                    <img src="./public/bio-pic.jpg" alt="Bio picture" />
+                    <!--<img
+                        src="https://placehold.co/150x150/cyan/black?text=Img2"
+                        alt="Image 2"
+                    />
+                    <img
+                        src="https://placehold.co/150x150/pink/white?text=Img3"
+                        alt="Image 3"
+                    />-->
+                </div>
+            </div>
+        </div>
+
+        <footer class="site-footer">
+            <p>&copy; <script>document.write(new Date().getFullYear())</script></p>
+        </footer>
+
+        <script>
+            (function () {
+                const toggle = document.querySelector(".theme-toggle");
+                const root = document.documentElement;
+
+                function getEffectiveTheme() {
+                    const stored = localStorage.getItem("theme");
+                    if (stored) return stored;
+                    return window.matchMedia("(prefers-color-scheme: dark)")
+                        .matches
+                        ? "dark"
+                        : "light";
+                }
+
+                const stored = localStorage.getItem("theme");
+                if (stored) {
+                    root.setAttribute("data-theme", stored);
+                }
+
+                toggle.addEventListener("click", function () {
+                    const current = getEffectiveTheme();
+                    const next = current === "dark" ? "light" : "dark";
+                    root.setAttribute("data-theme", next);
+                    localStorage.setItem("theme", next);
+                });
+            })();
+        </script>
+    </body>
 </html>
